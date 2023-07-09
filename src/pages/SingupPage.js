@@ -17,6 +17,8 @@ function SingupPage() {
     }    
     const [pwText, setPwText]= useState("");
     const [pwStyle, setPwStyle]= useState("");
+    // const [email, setEmail] = useState("");
+    // const [password, setPassword] = useState("");
     const handlePasswordChange = (value) => {
         if(validatePassword(value)){
             setPwText("");
