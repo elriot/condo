@@ -21,14 +21,12 @@ const usersApi = createApi({
                     }
                 }
             }),
-            addUser: builder.mutation({
-                query: (user) => {
-                    return {
+            addUser: builder.mutation({                
+                query: (user) => {                   
+                    return {                        
                         method: 'POST',
-                        url: '/uesrs',
-                        body: {
-
-                        }
+                        url: '/users', // 오타 수정. 'uesrs' -> 'users'
+                        body: user
                     }
                 }
             }),

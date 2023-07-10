@@ -11,14 +11,18 @@ const usersSlice = createSlice({
     extraReducers (builder) { // async
         builder.addCase(addUser.pending, (state, action)=>{
             state.isLoading = true;
+            console.log(111);
         });
         builder.addCase(addUser.fulfilled, (state, action)=>{
             state.isLoading = false;
-            state.data = action.payload;
+            state.data = action.payload; // id
+            // console.log(2222, "state", state.data)
+            // console.log("action", action);
         });
         builder.addCase(addUser.rejected, (state, action)=>{
             state.isLoading = false;
             state.error= action.error;
+            // console.log(3333);
         });
         // addUser(state, action) {
         //     console.log(state, action, "Hhh");

@@ -9,7 +9,7 @@ import { useState } from "react";
 import RadioCheckButton from "../component/RadioCheckButton";
 import { useDispatch, useSelector} from 'react-redux';
 import { changeEmail, changeName, changePassword, changeUnit, changeType, changePhone } from "../store/slicer/signupFormSlicer";
-import { addUser } from "../store";
+import { useAddUserMutation } from "../store";
 
 
 function SingupPage() {
@@ -54,7 +54,8 @@ function SingupPage() {
     const handleTypeChange = (value) => {
         dispatch(changeType(value));
     }
-    const handleSubmit = (event) => {
+    const [addUser, { isLoading, isError, error }] = useAddUserMutation();
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if(!validateEmail(email)){
             alert("invalid email"); return;
@@ -64,10 +65,11 @@ function SingupPage() {
             alert("input phone number"); return;
         } else if(!unit){
             alert("input unit number"); return;
+        } else if(!type){
+            alert("check residence type"); return;
         }
         const user = {email, password, name, phone, unit, type};
-        // console.log(user);
-        dispatch(addUser(user));
+        await addUser(user);
     }
 
     const outterStyles = "flex flex-row items-center m-3";

@@ -1,3 +1,22 @@
 {
-  "users": []  
+  "users": [
+    {
+      "email": "elriot@naver.com",
+      "password": "Aa1234567",
+      "name": "Soopin Kim",
+      "phone": "7788720632",
+      "unit": "12312",
+      "type": "tenant",
+      "id": 1
+    },
+    {
+      "email": "elrio2t@naver.com",
+      "password": "Aa1234156479879",
+      "name": "Soopin Kim",
+      "phone": "7788720632",
+      "unit": "132213",
+      "type": "tenant",
+      "id": 2
+    }
+  ]
 }
