@@ -4,38 +4,72 @@ import Input from "../component/Input";
 import Label from "../component/Label"
 import EmailInput from "../component/EmailInput"
 import PasswordInput from "../component/PasswordInput";
-import {validateEmail, validatePassword} from "../hooks/use-validation";
+import {validateEmail, numbersOnly, validatePassword} from "../hooks/use-validation";
 import { useState } from "react";
 import RadioCheckButton from "../component/RadioCheckButton";
-import classNames from "classnames";
+import { useDispatch, useSelector} from 'react-redux';
+import { changeEmail, changeName, changePassword, changeUnit, changeType, changePhone } from "../store/slicer/signupFormSlicer";
+import { addUser } from "../store";
 
 
 function SingupPage() {
-    const handleEmailChange = (value) => {
-        console.log("changeEmail", value, validateEmail(value));
-        // setEmail(event.target.value);
-    }    
+    const dispatch = useDispatch();
     const [pwText, setPwText]= useState("");
-    const [pwStyle, setPwStyle]= useState("");
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
+    
+    const { email, name, password, phone, unit, type } = useSelector((state) => {        
+        const result = {
+            email:state.signupForm.email,
+            name:state.signupForm.name,
+            password:state.signupForm.password,
+            phone:state.signupForm.phone,   
+            unit:state.signupForm.unit,
+            type:state.signupForm.type
+        };
+        return result;
+    });
+
+    const handleEmailChange = (value) => {
+        dispatch(changeEmail(value));  
+    }    
+
     const handlePasswordChange = (value) => {
         if(validatePassword(value)){
             setPwText("");
-            setPwStyle("");
         } else {
             setPwText("Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters");
-            setPwStyle("text-red-800");
         }
+        dispatch(changePassword(value));
     }
-    const handleNameChange = (value) => {
-        console.log("name", value);
-        // setEmail(event.target.value);
+
+    const handleNameChange = (value) => {        
+        dispatch(changeName(value));        
+    }
+
+    const handlePhoneChange = (value) => {    
+        dispatch(changePhone(value));        
+    }
+    const handleUnitChange = (value) => {    
+        dispatch(changeUnit(value));        
+    }
+    const handleTypeChange = (value) => {
+        dispatch(changeType(value));
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("submit!!", event.target.value);
+        if(!validateEmail(email)){
+            alert("invalid email"); return;
+        } else if(!validatePassword(password)){
+            alert("invalid password"); return;
+        } else if(!phone){
+            alert("input phone number"); return;
+        } else if(!unit){
+            alert("input unit number"); return;
+        }
+        const user = {email, password, name, phone, unit, type};
+        // console.log(user);
+        dispatch(addUser(user));
     }
+
     const outterStyles = "flex flex-row items-center m-3";
     
     return (
@@ -44,35 +78,31 @@ function SingupPage() {
                 <Panel>Sign up page</Panel>
                 <div className={outterStyles}>
                     <Label text="Email : " className="mr-3" htmlFor="email" autocomplete="email"/>
-                    <EmailInput id="email" onChange={handleEmailChange} />
+                    <EmailInput id="email" onChange={handleEmailChange} value={email}/>
                 </div>
                 <div className={outterStyles}>
                     <Label text="Password : " className="mr-3" htmlFor="password"/>
-                    <PasswordInput id="password" onChange={handlePasswordChange}/>
+                    <PasswordInput id="password" onChange={handlePasswordChange} value={password}/>
                     {
-                        pwText && <Label text={pwText} className={pwStyle} htmlFor="password"/>
+                        pwText && <Label warning text={pwText} htmlFor="password"/>
                     }
                     
                 </div>
                 <div className={outterStyles}>
                     <Label text="name : " className="mr-3" htmlFor="name" autocomplete="name"/>
-                    <Input id="name" onChange={handleNameChange}/>
-                </div>
-                <div className={outterStyles}>
-                    <Label text="type : " className="mr-3" htmlFor="type"/>
-                    <Input id="type" onChange={handleNameChange}/>
+                    <Input id="name" onChange={handleNameChange} value={name}/>
                 </div>
                 <div className={outterStyles}>
                     <Label text="phone : " className="mr-3" htmlFor="phone" autocomplete="email"/>
-                    <Input id="phone" onChange={handleNameChange}/>
+                    <Input id="phone" onChange={handlePhoneChange} value={phone} placeholder="ex) 7781234567"/>
                 </div>
                 <div className={outterStyles}>
-                    <Label text="unit no : " className="mr-3" htmlFor="name" autocomplete="address-line1"/>
-                    <Input id="name" onChange={handleNameChange}/>
+                    <Label text="unit no : " className="mr-3" htmlFor="unit"/>
+                    <Input id="unit" onChange={handleUnitChange} value={unit}/>
                 </div>
                 <div className={outterStyles}>
                     <Label text="Residence type : " className="mr-3" htmlFor="name" autocomplete="address-line1"/>
-                    <RadioCheckButton name="type" values={["tenant", "owner"]} classNames=""></RadioCheckButton>
+                    <RadioCheckButton onClick={handleTypeChange} name="type" values={["tenant", "owner"]} classNames=""></RadioCheckButton>
                 </div>
                 <Button primary className="rounded center">Submit</Button>
             </form>

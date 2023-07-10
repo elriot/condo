@@ -1,17 +1,14 @@
 import Input from "./Input";
-import { useState } from "react";
 
-function PasswordInput({ onChange, ...rest }) {
-    const [password, setPassword] = useState("");
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);        
-        onChange(password);
+function PasswordInput({ onPwChange, value, ...rest }) {
+    const handlePasswordChange = (event) => {         
+        onPwChange(event.target.value);
     }
     return (
         <Input
             type="password"            
             onChange={handlePasswordChange}
-            value ={password}
+            value ={value}
             {...rest}
         />
     );

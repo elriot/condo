@@ -1,16 +1,13 @@
 import Input from "./Input";
-import { useState } from "react";
 
-function EmailInput({ onChange, ...rest }) {
-    const [email, setEmail] = useState("");
+function EmailInput({ value, onEmailChange, ...rest }) {    
     const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-        onChange(email);
+        onEmailChange(event.target.value);
     }
     return (
         <Input
             type="email"
-            value={email}
+            value={value}
             onChange={handleEmailChange}
             placeholder="ex) sample123@gmail.com"
             {...rest}
