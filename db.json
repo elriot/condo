@@ -17,6 +17,15 @@
       "unit": "132213",
       "type": "tenant",
       "id": 2
+    },
+    {
+      "email": "elrio22t@naver.com",
+      "password": "Aa1234156479879",
+      "name": "Soopin Kim",
+      "phone": "7788720632",
+      "unit": "132213",
+      "type": "tenant",
+      "id": 3
     }
   ]
 }

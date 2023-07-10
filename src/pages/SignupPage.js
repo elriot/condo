@@ -12,7 +12,7 @@ import { changeEmail, changeName, changePassword, changeUnit, changeType, change
 import { useAddUserMutation } from "../store";
 
 
-function SingupPage() {
+function SignupPage() {
     const dispatch = useDispatch();
     const [pwText, setPwText]= useState("");
     
@@ -111,4 +111,4 @@ function SingupPage() {
         </div>
     )
 }
-export default SingupPage;
+export default SignupPage;
