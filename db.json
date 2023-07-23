@@ -2,30 +2,12 @@
   "users": [
     {
       "email": "elriot@naver.com",
-      "password": "Aa1234567",
+      "password": "Aa1235467869",
       "name": "Soopin Kim",
       "phone": "7788720632",
-      "unit": "12312",
+      "unit": "215",
       "type": "tenant",
       "id": 1
-    },
-    {
-      "email": "elrio2t@naver.com",
-      "password": "Aa1234156479879",
-      "name": "Soopin Kim",
-      "phone": "7788720632",
-      "unit": "132213",
-      "type": "tenant",
-      "id": 2
-    },
-    {
-      "email": "elrio22t@naver.com",
-      "password": "Aa1234156479879",
-      "name": "Soopin Kim",
-      "phone": "7788720632",
-      "unit": "132213",
-      "type": "tenant",
-      "id": 3
     }
   ]
 }
