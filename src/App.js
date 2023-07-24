@@ -6,11 +6,9 @@ import Sidebar from "./component/Sidebar";
 
 function App() {
     return (
-        <div>
-            <Sidebar></Sidebar>
-            {/* <Link to="/main">**Go To Main**</Link>
-            <Link to="/signup">**Go To Signup**</Link> */}
-            <div>
+        <div className="container mx-auto grid grid-cols-6 gap-4 mt-4">
+            <Sidebar />
+            <div className="col-span-5">
                 <Route path="/">
                     <MainPage></MainPage>
                 </Route>
