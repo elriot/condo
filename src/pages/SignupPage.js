@@ -7,11 +7,19 @@ import RadioCheckButton from '../component/RadioCheckButton';
 import Button from '../component/Button';
 import { useState } from 'react';
 import {validateEmail, validatePassword} from '../hooks/use-validation';
+import useUsersContext from '../hooks/use-users-context';
 
 function SignupPage(){
+    const { createUser } = useUsersContext();
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("submit button");
+        console.log(emailLabel, passwordLabel);
+
+        if(emailLabel !== null || passwordLabel !== null)
+            return;
+        const user = {email, password, name, phone,unit,type};
+        console.log(user);
+        // createUser(user);        
     }
     const outterStyles = "mt-3 mb-3";
 
@@ -46,13 +54,13 @@ function SignupPage(){
     }
 
     // phone
-    const [phone, setPhone] = useState();
+    const [phone, setPhone] = useState("");
     const handlePhoneChange = (value) => {
         setPhone(value);
     }
 
     // unitNo
-    const [unit, setUnit] = useState();
+    const [unit, setUnit] = useState("");
     const handleUnitChange = (value) => {
         setUnit(value);
     }
