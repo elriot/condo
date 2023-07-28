@@ -21,7 +21,9 @@ function SignupPage(){
 
         if(emailLabel !== null || passwordLabel !== null)
             return;
-        const user = {email, password, name, phone,unit,type};
+        
+        const approved = false;
+        const user = {email, password, name, phone,unit,type, approved};
         dispatch(addUser(user));        
     }
     const outterStyles = "mt-3 mb-3";

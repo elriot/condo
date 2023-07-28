@@ -7,9 +7,14 @@ const usersSlice = createSlice({
     initialState:{
         data:[],
         isLoading:false,
-        error:null 
+        error:null,
+        searchTerm:''
     },
-    reducers:{}, // 동기 
+    reducers:{
+        changeSearchTerm(state, action){
+            state.searchTerm = action.payload;
+        },
+    }, 
     extraReducers(builder){ // 서버 응답을 받아 처리하는 비동기 작업들
         builder.addCase(fetchUsers.pending, (state, action)=>{
             state.isLoading = true;
@@ -39,4 +44,5 @@ const usersSlice = createSlice({
 // fetchUsers.pending === 'users/fetch/pending'
 // fetchUsers.fulfilled === 'users/fetch/fulfilled'
 // fetchUsers.rejected === 'users/fetch/rejected'
+export const {changeSearchTerm} = usersSlice.actions;
 export const usersReducer = usersSlice.reducer;

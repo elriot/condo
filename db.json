@@ -7,6 +7,7 @@
       "phone": "7788720632",
       "unit": "107",
       "type": "tenant",
+      "approved": true,
       "id": 1
     },
     {
@@ -16,15 +17,17 @@
       "phone": "7788720632",
       "unit": "4502",
       "type": "owner",
+      "approved": false,
       "id": 2
     },
     {
       "email": "test1234@gmail.com",
-      "password": "ab1234567Ab",
-      "name": "lebao",
-      "phone": "6047259563",
-      "unit": "owner",
-      "type": "owner",
+      "password": "Aa12345678",
+      "name": "Fubao",
+      "phone": "6047253157",
+      "unit": "6504",
+      "type": "tenant",
+      "approved": false,
       "id": 3
     }
   ]
