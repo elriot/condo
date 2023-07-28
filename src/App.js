@@ -2,6 +2,7 @@ import MainPage from "./pages/MainPage";
 import SignupPage from "./pages/SignupPage";
 import Route from "./component/Route";
 import Sidebar from "./component/Sidebar";
+import UsersListPage from "./pages/UsersListPage";
 // import Link from "./component/Link";
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
                 </Route>
                 <Route path="/signup">
                     <SignupPage></SignupPage>
+                </Route>
+                <Route path="/userslist">
+                    <UsersListPage></UsersListPage>
                 </Route>
             </div>
         </div>

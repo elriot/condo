@@ -5,9 +5,27 @@
       "password": "Aa1235467869",
       "name": "Soopin Kim",
       "phone": "7788720632",
-      "unit": "215",
+      "unit": "107",
       "type": "tenant",
       "id": 1
+    },
+    {
+      "email": "elriot123@naver.com",
+      "password": "Aa1324567",
+      "name": "Soopin Kim",
+      "phone": "7788720632",
+      "unit": "4502",
+      "type": "owner",
+      "id": 2
+    },
+    {
+      "email": "test1234@gmail.com",
+      "password": "ab1234567Ab",
+      "name": "lebao",
+      "phone": "6047259563",
+      "unit": "owner",
+      "type": "owner",
+      "id": 3
     }
   ]
 }

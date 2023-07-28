@@ -7,10 +7,14 @@ import RadioCheckButton from '../component/RadioCheckButton';
 import Button from '../component/Button';
 import { useState } from 'react';
 import {validateEmail, validatePassword} from '../hooks/use-validation';
-import useUsersContext from '../hooks/use-users-context';
+import { addUser } from '../store';
+import { useDispatch } from 'react-redux';
+// import useUsersContext from '../hooks/use-users-context';
 
 function SignupPage(){
-    const { createUser } = useUsersContext();
+    // const { createUser } = useUsersContext();
+    const dispatch = useDispatch();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(emailLabel, passwordLabel);
@@ -18,8 +22,7 @@ function SignupPage(){
         if(emailLabel !== null || passwordLabel !== null)
             return;
         const user = {email, password, name, phone,unit,type};
-        console.log(user);
-        // createUser(user);        
+        dispatch(addUser(user));        
     }
     const outterStyles = "mt-3 mb-3";
 
@@ -66,7 +69,7 @@ function SignupPage(){
     }
 
     // residence type
-    const [type, setType] = useState("");
+    const [type, setType] = useState("tenant");
     const handleTypeChange = (value) => {
         setType(value);
     }

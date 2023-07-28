@@ -4,6 +4,7 @@ function Sidebar(){
   const links = [
     {label : 'Main', path:'/'},
     {label : 'Signup', path:'/signup'},
+    {label : 'UsersList', path:'/userslist'},
   ];
 
   const renderedLinks = links.map((link) => {
