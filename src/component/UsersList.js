@@ -4,6 +4,7 @@ import { fetchUsers } from "../store";
 import Table from "./Table";
 import SearchBar from './SearchBar';
 import { changeSearchTerm } from '../store/slices/usersSlice'
+import SortableTable from "./SortableTable";
 
 function UsersList() {
     const [search, setSearch] = useState("");
@@ -27,10 +28,15 @@ function UsersList() {
 
     const config = [
         { label: 'Email', render: (user) => user.email, sortValue: (user) => user.email },
-        { label: 'Name', render: (user) => user.name },
+        { label: 'Name', render: (user) => user.name , sortValue: (user) => user.name},
         { label: 'Phone', render: (user) => user.phone, sortValue: (user) => user.phone },
         { label: 'Unit No', render: (user) => user.unit, sortValue: (user) => user.unit },
         { label: 'Type', render: (user) => user.type, sortValue: (user) => user.type },
+        {
+            label: 'Approved',
+            render: (user) => <div>{String(user.approved)}</div>,
+            sortValue: (user) => user.approved
+        }
     ]
     const keyFn = (user) => {
         return user.email;
@@ -48,16 +54,20 @@ function UsersList() {
         user.name.toLowerCase().includes(search.toLowerCase()) ||
         user.phone.toLowerCase().includes(search.toLowerCase()) ||
         user.unit.toLowerCase().includes(search.toLowerCase()) ||
-        user.type.toLowerCase().includes(search.toLowerCase())
+        user.type.toLowerCase().includes(search.toLowerCase()) ||
+        String(user.approved).toLowerCase().includes(search.toLowerCase()) 
     );
-    
+    // console.log(filteredData)
     return <div>
         <div><SearchBar placeholder="Search.." className="flex justify-center mb-3" onSearch={handleSearch}></SearchBar></div>
-        <Table data={filteredData} config={config} keyFn={keyFn}></Table>
+        
+        <SortableTable data={filteredData} config={config} keyFn={keyFn}></SortableTable>
+        {/* <Table data={filteredData} config={config} keyFn={keyFn}></Table> */}
     </div>
 }
 
 export default UsersList;
+
 
 
 
