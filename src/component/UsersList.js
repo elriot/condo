@@ -5,6 +5,7 @@ import Table from "./Table";
 import SearchBar from './SearchBar';
 import { changeSearchTerm } from '../store/slices/usersSlice'
 import SortableTable from "./SortableTable";
+import Button from "./Button"
 
 function UsersList() {
     const [search, setSearch] = useState("");
@@ -26,6 +27,23 @@ function UsersList() {
         return <div>Error fetching data..</div>
     }
 
+    // Redux action
+    function toggleApproved(user) {
+        return { type: "TOGGLE_APPROVED", payload: user };
+    }
+
+    // Add this event handler
+    const handleToggleApproved = (user) => {
+        console.log("test", user.approved);
+        dispatch(toggleApproved(user));
+    }
+    const getApprovedButton = (user) => {
+        if(user.approved){
+            return <Button onClick={() => handleToggleApproved(user)} primary>approved</Button>
+        } else {
+            return <Button onClick={() => handleToggleApproved(user)}>disabled</Button>
+        }
+    }
     const config = [
         { label: 'Email', render: (user) => user.email, sortValue: (user) => user.email },
         { label: 'Name', render: (user) => user.name , sortValue: (user) => user.name},
@@ -34,7 +52,7 @@ function UsersList() {
         { label: 'Type', render: (user) => user.type, sortValue: (user) => user.type },
         {
             label: 'Approved',
-            render: (user) => <div>{String(user.approved)}</div>,
+            render: (user) => getApprovedButton(user),
             sortValue: (user) => user.approved
         }
     ]
