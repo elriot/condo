@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUsers } from "../thunks/fetchUsers";
 import { addUser } from "../thunks/addUser";
+import { updateApproved } from "../thunks/updateApproved";
 
 const usersSlice = createSlice({
     name: 'users',
@@ -38,7 +39,21 @@ const usersSlice = createSlice({
             state.isLoading = false;
             state.error = action.error;
         });
-        
+        builder.addCase(updateApproved.pending, (state,action)=>{
+            state.isLoading = true;
+        });
+        builder.addCase(updateApproved.fulfilled, (state, action) => {
+            state.isLoading = false;
+            // Find user and update 'approved' status
+            const user = state.data.find(user => user.id === action.payload.id);
+            if (user) {
+                user.approved = action.payload.approved;
+            }
+        });
+        builder.addCase(updateApproved.rejected, (state,action)=>{
+            state.isLoading = false;
+            state.error = action.error;
+        });
     }
 });
 // fetchUsers.pending === 'users/fetch/pending'

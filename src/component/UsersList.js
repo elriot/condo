@@ -6,9 +6,12 @@ import SearchBar from './SearchBar';
 import { changeSearchTerm } from '../store/slices/usersSlice'
 import SortableTable from "./SortableTable";
 import Button from "./Button"
+import { updateApproved } from "../store";
+import Checkbox from "./Checkbox";
 
 function UsersList() {
     const [search, setSearch] = useState("");
+    const [selectedUsers, setSelectedUsers] = useState([]);
 
     const dispatch = useDispatch();
     const { isLoading, data, error } = useSelector((state) => {
@@ -27,15 +30,8 @@ function UsersList() {
         return <div>Error fetching data..</div>
     }
 
-    // Redux action
-    function toggleApproved(user) {
-        return { type: "TOGGLE_APPROVED", payload: user };
-    }
-
-    // Add this event handler
     const handleToggleApproved = (user) => {
-        console.log("test", user.approved);
-        dispatch(toggleApproved(user));
+        dispatch(updateApproved(user));
     }
     const getApprovedButton = (user) => {
         if(user.approved){
@@ -44,7 +40,20 @@ function UsersList() {
             return <Button onClick={() => handleToggleApproved(user)}>disabled</Button>
         }
     }
+    
+
+    const handleCheckboxChange = (id, checked) => {
+        if (checked) {
+            setSelectedUsers([...selectedUsers, id]);
+        } else {
+            setSelectedUsers(selectedUsers.filter((userId) => userId !== id));
+        }        
+    };
     const config = [
+        {
+            label: 'checkToDel',
+            render: (user) => <Checkbox id={user.id} checked={selectedUsers.includes(user.id)} onChange={handleCheckboxChange} />
+        },
         { label: 'Email', render: (user) => user.email, sortValue: (user) => user.email },
         { label: 'Name', render: (user) => user.name , sortValue: (user) => user.name},
         { label: 'Phone', render: (user) => user.phone, sortValue: (user) => user.phone },
@@ -68,18 +77,26 @@ function UsersList() {
 
     // Filter data based on search
     const filteredData = data.filter(user =>
-        user.email.toLowerCase().includes(search.toLowerCase()) ||
-        user.name.toLowerCase().includes(search.toLowerCase()) ||
-        user.phone.toLowerCase().includes(search.toLowerCase()) ||
-        user.unit.toLowerCase().includes(search.toLowerCase()) ||
-        user.type.toLowerCase().includes(search.toLowerCase()) ||
-        String(user.approved).toLowerCase().includes(search.toLowerCase()) 
+        (user.email?.toLowerCase().includes(search.toLowerCase())) ||
+        (user.name?.toLowerCase().includes(search.toLowerCase())) ||
+        (user.phone?.toLowerCase().includes(search.toLowerCase())) ||
+        (user.unit?.toLowerCase().includes(search.toLowerCase())) ||
+        (user.type?.toLowerCase().includes(search.toLowerCase())) ||
+        String(user.approved).toLowerCase().includes(search.toLowerCase())
     );
-    // console.log(filteredData)
+
+    // console.log(filteredData.length)
     return <div>
-        <div><SearchBar placeholder="Search.." className="flex justify-center mb-3" onSearch={handleSearch}></SearchBar></div>
-        
-        <SortableTable data={filteredData} config={config} keyFn={keyFn}></SortableTable>
+        <div className="flex items-center mb-3">
+            <SearchBar placeholder="Search.." onSearch={handleSearch}></SearchBar>
+            <Button className="">delete</Button>
+        </div>
+
+        {filteredData.length > 0 ? (
+            <SortableTable data={filteredData} config={config} keyFn={keyFn}></SortableTable>
+        ) : (
+            <p>No Data</p>
+        )}
         {/* <Table data={filteredData} config={config} keyFn={keyFn}></Table> */}
     </div>
 }

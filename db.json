@@ -1,32 +1,32 @@
 {
   "users": [
     {
-      "email": "elriot@naver.com",
-      "password": "Aa1235467869",
-      "name": "Soopin Kim",
-      "phone": "7788720632",
-      "unit": "107",
+      "email": "test1234@naver.com",
+      "password": "Aa1234567",
+      "name": "Fubao",
+      "phone": "6048521357",
+      "unit": "720",
       "type": "tenant",
       "approved": true,
       "id": 1
     },
     {
-      "email": "elriot123@naver.com",
-      "password": "Aa1324567",
-      "name": "Soopin Kim",
-      "phone": "7788720632",
-      "unit": "4502",
+      "email": "Lebao@gmail.com",
+      "password": "Aa123456789",
+      "name": "Lebao",
+      "phone": "7287280713",
+      "unit": "728",
       "type": "owner",
       "approved": false,
       "id": 2
     },
     {
-      "email": "test1234@gmail.com",
-      "password": "Aa12345678",
-      "name": "Fubao",
-      "phone": "6047253157",
-      "unit": "6504",
-      "type": "tenant",
+      "email": "Aibao@hotmail.com",
+      "password": "Aa1234567",
+      "name": "Aibao",
+      "phone": "7287130720",
+      "unit": "720",
+      "type": "owner",
       "approved": false,
       "id": 3
     }
