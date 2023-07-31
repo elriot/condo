@@ -1,6 +1,8 @@
 import { GoArrowDown, GoArrowUp } from "react-icons/go";
 import Table from "./Table"
 import useSort from "../hooks/use-sort";
+import classNames from "classnames";
+import { getThStyle } from "../lib/common-css";
 
 function SortableTable(props) {
     const { config, data } = props;
@@ -18,7 +20,7 @@ function SortableTable(props) {
         return {
             ...column,
             header: () => (
-                <th className="cursor-pointer hover:bg-gray-100" onClick={() => setSortColumn(column.label)}>
+                <th className={classNames("cursor-pointer hover:bg-gray-100", getThStyle())} onClick={() => setSortColumn(column.label)}>
                     <div className="flex item-center">
                         {getIcons(column.label, sortBy, sortOrder)}
                         {column.label}

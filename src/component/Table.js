@@ -1,5 +1,5 @@
-
 import { Fragment } from "react";
+import { getThStyle } from "../lib/common-css";
 // function Echo({children}){ // fragment와 구현이 같음
 //     return children;
 // }
@@ -9,7 +9,7 @@ function Table({ data, config, keyFn }) {
         if (column.header) {
             return <Fragment key={column.label}>{column.header()}</Fragment>;
         }
-        return <th key={column.label} className="pl-3 pr-3 border-b-2">{column.label}</th>;
+        return <th key={column.label} className={getThStyle()}>{column.label}</th>;
     });
 
     const renderedRows = data.map((rowData) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../store";
+import { deleteUser, fetchUsers } from "../store";
 import Table from "./Table";
 import SearchBar from './SearchBar';
 import { changeSearchTerm } from '../store/slices/usersSlice'
@@ -27,6 +27,7 @@ function UsersList() {
         return <div>Loading...</div>
     }
     if (error) {
+        console.log(error);
         return <div>Error fetching data..</div>
     }
 
@@ -35,9 +36,9 @@ function UsersList() {
     }
     const getApprovedButton = (user) => {
         if(user.approved){
-            return <Button onClick={() => handleToggleApproved(user)} primary>approved</Button>
+            return <Button onClick={() => handleToggleApproved(user)} primary className="rounded">approved</Button>
         } else {
-            return <Button onClick={() => handleToggleApproved(user)}>disabled</Button>
+            return <Button onClick={() => handleToggleApproved(user)} className="rounded">disabled</Button>
         }
     }
     
@@ -49,9 +50,21 @@ function UsersList() {
             setSelectedUsers(selectedUsers.filter((userId) => userId !== id));
         }        
     };
+    const handleDeleteClick = async () => {
+        // const newUsers  
+        for(let i = 0; i < selectedUsers.length; i++){            
+            await dispatch(deleteUser(selectedUsers[i]));
+        }
+        
+        // await for redraw table
+        await setSelectedUsers([]);
+        await dispatch(fetchUsers());
+    };
+    
+    
     const config = [
         {
-            label: 'checkToDel',
+            label: <Button className="rounded" onClick={handleDeleteClick}warning>delete</Button>,
             render: (user) => <Checkbox id={user.id} checked={selectedUsers.includes(user.id)} onChange={handleCheckboxChange} />
         },
         { label: 'Email', render: (user) => user.email, sortValue: (user) => user.email },
@@ -74,7 +87,6 @@ function UsersList() {
         dispatch(changeSearchTerm(userInput));
         setSearch(userInput);
     }
-
     // Filter data based on search
     const filteredData = data.filter(user =>
         (user.email?.toLowerCase().includes(search.toLowerCase())) ||
@@ -85,11 +97,9 @@ function UsersList() {
         String(user.approved).toLowerCase().includes(search.toLowerCase())
     );
 
-    // console.log(filteredData.length)
     return <div>
         <div className="flex items-center mb-3">
-            <SearchBar placeholder="Search.." onSearch={handleSearch}></SearchBar>
-            <Button className="">delete</Button>
+            <SearchBar placeholder="Search.." onSearch={handleSearch}></SearchBar>            
         </div>
 
         {filteredData.length > 0 ? (
