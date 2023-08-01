@@ -8,6 +8,8 @@ import SortableTable from "./SortableTable";
 import Button from "./Button"
 import { updateApproved } from "../store";
 import Checkbox from "./Checkbox";
+import Panel from "./Panel";
+import classNames from "classnames";
 
 function UsersList() {
     const [search, setSearch] = useState("");
@@ -65,7 +67,7 @@ function UsersList() {
     const config = [
         {
             label: <Button className="rounded" onClick={handleDeleteClick}warning>delete</Button>,
-            render: (user) => <Checkbox id={user.id} checked={selectedUsers.includes(user.id)} onChange={handleCheckboxChange} />
+            render: (user) => <Checkbox id={user.id} checked={selectedUsers.includes(user.id)} classNames="flex items-center" onChange={handleCheckboxChange} />
         },
         { label: 'Email', render: (user) => user.email, sortValue: (user) => user.email },
         { label: 'Name', render: (user) => user.name , sortValue: (user) => user.name},
@@ -98,6 +100,7 @@ function UsersList() {
     );
 
     return <div>
+        <Panel className="mb-5">User List Page</Panel>
         <div className="flex items-center mb-3">
             <SearchBar placeholder="Search.." onSearch={handleSearch}></SearchBar>            
         </div>

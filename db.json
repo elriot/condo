@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "email": "test1234@naver.com",
+      "email": "fubao@naver.com",
       "password": "Aa1234567",
       "name": "Fubao",
       "phone": "6048521357",
@@ -29,6 +29,36 @@
       "type": "owner",
       "approved": false,
       "id": 3
+    },
+    {
+      "email": "yuihin@advan.com",
+      "password": "Yui13579",
+      "name": "Yuihin",
+      "phone": "6041234567",
+      "unit": "760",
+      "type": "owner",
+      "approved": false,
+      "id": 4
+    },
+    {
+      "email": "Fuhin@advan.com",
+      "password": "Fuhin123456",
+      "name": "Fuhin",
+      "phone": "7781012022",
+      "unit": "2020",
+      "type": "tenant",
+      "approved": false,
+      "id": 5
+    },
+    {
+      "email": "ouhin@advan.com",
+      "password": "Ouhin12345",
+      "name": "Ouhin",
+      "phone": "7782012016",
+      "unit": "2016",
+      "type": "tenant",
+      "approved": true,
+      "id": 6
     }
   ]
 }

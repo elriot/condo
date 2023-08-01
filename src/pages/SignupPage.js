@@ -8,23 +8,33 @@ import Button from '../component/Button';
 import { useState } from 'react';
 import {validateEmail, validatePassword} from '../hooks/use-validation';
 import { addUser } from '../store';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import useUsersContext from '../hooks/use-users-context';
 
 function SignupPage(){
     // const { createUser } = useUsersContext();
     const dispatch = useDispatch();
-
-    const handleSubmit = (event) => {
+    const isLoading = useSelector((state) => state.users.isLoading);
+    const resetForm = () => {
+        setEmail('');
+        setEmailLabel(null);
+        setPassword('');
+        setPasswordLabel(null);
+        setName('');
+        setPhone('');
+        setUnit('');
+        setType('tenant');
+    };
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(emailLabel, passwordLabel);
-
         if(emailLabel !== null || passwordLabel !== null)
             return;
         
         const approved = false;
-        const user = {email, password, name, phone,unit,type, approved};
-        dispatch(addUser(user));        
+        const user = {email, password, name, phone,unit,type, approved};        
+        await dispatch(addUser(user)); 
+        alert("signup completed!");
+        resetForm();                
     }
     const outterStyles = "mt-3 mb-3";
 
@@ -110,7 +120,8 @@ function SignupPage(){
                     <Label text="Residence type : " className="mr-3" htmlFor="name" autocomplete="address-line1"/>
                     <RadioCheckButton onClick={handleTypeChange} name="type" values={["tenant", "owner"]} classNames="" value={type}></RadioCheckButton>
                 </div> 
-                <Button primary className="rounded center mt-6">Submit</Button>
+                <Button primary className="rounded center mt-6" loading={isLoading}>Submit</Button>
+                {/* <Button primary className="rounded center mt-6">Submit</Button> */}
             </form>
         </div>
     );

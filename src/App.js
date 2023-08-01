@@ -3,7 +3,6 @@ import SignupPage from "./pages/SignupPage";
 import Route from "./component/Route";
 import Sidebar from "./component/Sidebar";
 import UsersListPage from "./pages/UsersListPage";
-// import Link from "./component/Link";
 
 function App() {
     return (
