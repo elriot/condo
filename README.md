@@ -29,7 +29,7 @@ The project extensively uses Redux Toolkit to manage the application's state eff
 Feel free to check out the project repository for a more in-depth look at the code and functionalities. Feedback and suggestions are always appreciated!
 
 **Repository Link:** [GitHub Repository URL](https://github.com/elriot/condo)
-
+ 
 ## Screenshots
 
 _This project is part of my portfolio to showcase my skills and experience as a web developer. If you have any questions or would like to get in touch, please feel free to contact me._
