@@ -17,7 +17,7 @@ const usersSlice = createSlice({
             state.searchTerm = action.payload;
         },
     }, 
-    extraReducers(builder){ // 서버 응답을 받아 처리하는 비동기 작업들
+    extraReducers(builder){ // asynchronous tasks that receive and process server responses
         builder.addCase(fetchUsers.pending, (state, action)=>{
             state.isLoading = true;
         });

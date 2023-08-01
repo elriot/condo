@@ -8,7 +8,7 @@ const Checkbox = ({ id, checked, onChange, className }) => {
           type="checkbox"
           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded flex-auto"
           checked={checked}
-          onChange={(e) => onChange(id, e.target.checked)}  // id 인자 추가
+          onChange={(e) => onChange(id, e.target.checked)}  
         />
       </div>
     );

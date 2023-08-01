@@ -11,10 +11,10 @@ function NavigationProvider({children}) {
             setCurrentPath(window.location.pathname);
         };
         window.addEventListener('popstate', handler);
-        // popstate 이벤트는 브라우저의 히스토리 항목 변경을 감지 (예: 사용자가 뒤로가기 버튼을 클릭할 때)
+        // popstate : catch Event changing Browser history (ex: when user clicked prev button)
         
         return () => {
-            //NavigationProvider가 screen에서 remove될 때 removeEventhandler
+            //when NavigationProvider removed from screen, call removeEventhandler
             window.removeEventListener('popstate', handler);
         };       
         
