@@ -7,7 +7,7 @@
       "phone": "6048521357",
       "unit": "720",
       "type": "tenant",
-      "approved": true,
+      "approved": false,
       "id": 1
     },
     {
@@ -57,7 +57,7 @@
       "phone": "7782012016",
       "unit": "2016",
       "type": "tenant",
-      "approved": true,
+      "approved": false,
       "id": 6
     }
   ]
